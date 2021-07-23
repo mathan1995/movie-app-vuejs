@@ -21,10 +21,10 @@ export default {
       return this.$store.getters.getMovies;
     },
   },
-  // created() {
-  //   // one of the lifecycle events of our components
-  //   this.movies = this.$store.getters.getMovies;
-  // },
+  created() {
+    // one of the lifecycle events of our components
+    this.$store.dispatch("fetchMovies");
+  },
 };
 </script>
 

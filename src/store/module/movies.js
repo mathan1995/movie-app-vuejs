@@ -1,14 +1,15 @@
-import movielist from "../../assets/movie-list";
-
+// import movielist from "../../assets/movie-list";
+import moviesApi from "../../services/moviesApi";
 // store constant variables
 const SET_SEARCH = "SET_SEARCH";
 const SET_FILTER = "SET_FILTER";
 const ADD_MOVIE = "ADD_MOVIE";
 const DELETE_MOVIE = "DELETE_MOVIE";
 const UPDATE_MOVIE = "UPDATE_MOVIE";
+const SET_MOVIES = "SET_MOVIES";
 
 const state = {
-  movies: movielist,
+  movies: [],
   search: "",
   filter: {
     rating: "",
@@ -42,6 +43,9 @@ const mutations = {
       return oldMovie;
     });
   },
+  [SET_MOVIES](state, movies) {
+    state.movies = movies;
+  },
 };
 
 const actions = {
@@ -60,8 +64,11 @@ const actions = {
   deleteMovie({ commit }, id) {
     commit(DELETE_MOVIE, id);
   },
-  addMovie({ commit }, movie) {
-    commit(UPDATE_MOVIE, movie);
+  fetchMovies({ commit }) {
+    moviesApi
+      .getMovies()
+      .then((res) => commit(SET_MOVIES, res))
+      .catch((error) => console.log(error));
   },
 };
 
