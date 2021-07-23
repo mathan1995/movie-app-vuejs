@@ -143,8 +143,9 @@ export default {
       this.showModal = false;
     },
     deleteMovie() {
-      this.$store.dispatch("deleteMovie", parseInt(this.id));
-      this.$router.push("/");
+      this.$store
+        .dispatch("deleteMovie", this.id)
+        .then((res) => this.$router.push("/"));
     },
   },
 

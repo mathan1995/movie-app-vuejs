@@ -21,7 +21,9 @@ const moviesApi = {
   updateMovie: async (form) => {
     return await db.doc(form.id).update(form);
   },
-  deleteMovie: async () => {},
+  deleteMovie: async (id) => {
+    return await db.doc(id).delete();
+  },
 };
 
 export default moviesApi;

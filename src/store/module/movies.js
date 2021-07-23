@@ -57,6 +57,7 @@ const actions = {
     commit(SET_FILTER, filter);
   },
 
+  // add action
   addMovie({ commit, state }, movie) {
     moviesApi
       .addMovie(movie)
@@ -67,9 +68,18 @@ const actions = {
     // commit(ADD_MOVIE, movie);
   },
 
+  // delete action
   deleteMovie({ commit }, id) {
-    commit(DELETE_MOVIE, id);
+    moviesApi
+      .deleteMovie(id)
+      .then((res) => {
+        commit(DELETE_MOVIE, res);
+        return;
+      })
+      .catch((error) => console.log(error));
   },
+
+  // update action
   updateMovie({ commit }, movie) {
     moviesApi
       .updateMovie(movie)
@@ -77,6 +87,7 @@ const actions = {
       .catch((error) => console.log(error));
   },
 
+  // fetch action
   fetchMovies({ commit }) {
     moviesApi
       .getMovies()
