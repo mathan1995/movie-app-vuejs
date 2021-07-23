@@ -118,6 +118,7 @@
 import Navbar from "../components/Navbar.vue";
 import ratingMixin from "../mixins/getRatingColor";
 import Modal from "../components/Modal.vue";
+import moviesApi from "../services/moviesApi";
 export default {
   mixins: [ratingMixin],
   components: {
@@ -126,7 +127,7 @@ export default {
   },
   props: {
     id: {
-      type: Number,
+      type: [String, Number],
       default: null,
     },
   },
@@ -149,7 +150,15 @@ export default {
 
   created() {
     // call from store
-    this.movie = this.$store.getters.getMovieById(parseInt(this.id));
+    const movie = this.$store.getters.getMovieById(parseInt(this.id));
+    if (movie) {
+      this.movie = movie;
+    } else {
+      moviesApi
+        .getMovieById(this.id)
+        .then((res) => (this.movie = res))
+        .catch((error) => console.log(erroe));
+    }
   },
 };
 </script>

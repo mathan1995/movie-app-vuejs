@@ -58,12 +58,25 @@ const actions = {
   },
 
   addMovie({ commit, state }, movie) {
-    movie.id = state.movies.length + 1;
-    commit(ADD_MOVIE, movie);
+    moviesApi
+      .addMovie(movie)
+      .then((res) => commit(ADD_MOVIE, res))
+      .catch((error) => console.log(error));
+
+    // movie.id = state.movies.length + 1;
+    // commit(ADD_MOVIE, movie);
   },
+
   deleteMovie({ commit }, id) {
     commit(DELETE_MOVIE, id);
   },
+  updateMovie({ commit }, movie) {
+    moviesApi
+      .updateMovie(movie)
+      .then((res) => commit(UPDATE_MOVIE, res))
+      .catch((error) => console.log(error));
+  },
+
   fetchMovies({ commit }) {
     moviesApi
       .getMovies()
