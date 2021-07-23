@@ -36,7 +36,7 @@ export default {
     display: flex;
     padding: 15px;
     justify-content: space-between;
-    background-color: #01a357;
+    background-color: #49af7b;
 
     h2 {
       margin: 0 1rem 0 0;

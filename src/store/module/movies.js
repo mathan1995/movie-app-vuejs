@@ -7,9 +7,11 @@ const ADD_MOVIE = "ADD_MOVIE";
 const DELETE_MOVIE = "DELETE_MOVIE";
 const UPDATE_MOVIE = "UPDATE_MOVIE";
 const SET_MOVIES = "SET_MOVIES";
+const LOADING_STATUS = "LOADING_STATUS";
 
 const state = {
   movies: [],
+  loadingStatus: true,
   search: "",
   filter: {
     rating: "",
@@ -18,6 +20,10 @@ const state = {
 };
 
 const mutations = {
+  // loading status
+  [LOADING_STATUS](state, newLoadingStatus) {
+    state.loadingStatus = newLoadingStatus;
+  },
   // Search global mutation
   [SET_SEARCH](state, search) {
     state.search = search;
@@ -91,12 +97,18 @@ const actions = {
   fetchMovies({ commit }) {
     moviesApi
       .getMovies()
-      .then((res) => commit(SET_MOVIES, res))
+      .then((res) => {
+        commit(SET_MOVIES, res);
+        commit(LOADING_STATUS, false);
+      })
       .catch((error) => console.log(error));
   },
 };
 
 const getters = {
+  getLoadingStatus(state) {
+    return state.loadingStatus;
+  },
   getMovies: (state) => {
     return state.movies
       .filter(

@@ -158,7 +158,7 @@ export default {
       moviesApi
         .getMovieById(this.id)
         .then((res) => (this.movie = res))
-        .catch((error) => console.log(erroe));
+        .catch((error) => console.log(error));
     }
   },
 };

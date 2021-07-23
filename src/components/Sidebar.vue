@@ -136,7 +136,7 @@ export default {
   & > button {
     margin-top: 20px;
     padding: 20px;
-    background-color: #5eb85e;
+    background-color: #49af7b;
     border: none;
     text-transform: uppercase;
     font-weight: 600;

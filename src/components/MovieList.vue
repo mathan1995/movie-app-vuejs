@@ -1,14 +1,21 @@
 <template>
-  <div id="movie-container">
-    <movie v-for="movie in movies" :key="movie.id" :movie="movie" />
+  <div v-if="loadingStatus">
+    <spinner />
+  </div>
+  <div v-else>
+    <div id="movie-container">
+      <movie v-for="movie in movies" :key="movie.id" :movie="movie" />
+    </div>
   </div>
 </template>
 
 <script>
 import Movie from "./Movie.vue";
+import Spinner from "./Spinner.vue";
 export default {
   components: {
     Movie,
+    Spinner,
   },
   data() {
     return {
@@ -19,6 +26,9 @@ export default {
     // Its like useEffect in react
     movies() {
       return this.$store.getters.getMovies;
+    },
+    loadingStatus() {
+      return this.$store.getters.getLoadingStatus;
     },
   },
   created() {
